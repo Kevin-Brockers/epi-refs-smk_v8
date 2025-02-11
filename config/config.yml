@@ -1,0 +1,42 @@
+# Common file paths
+SAMPLE_MANIFEST: 'config/sample_manifest.tsv'
+RESULTS_DIR: 'results'
+FIGURE_DIR: 'results/figures'
+REPORT_DIR: 'report'
+EXTERNAL_DATA_DIR: 'resources/external'
+METHOD_DIR: 'report/methods'
+FASTQ_DIR: 'resources/raw_seq_data'
+INDEX_DIR: 'resources/external/index'
+BAM_DIR: 'results/bam_files'
+RESOURCES_DIR: 'resources'
+QUALITY_CONTROL_DIR: 'results/quality_controls'
+LOG_DIR: 'logs'
+TEMP_DIR: 'temp_data/chip_seq'
+
+# ------------------------------- Parameters -------------------------------- #
+REFERENCE_GENOME: 'mm10'
+
+#-------------------------- Trim galore parameters--------------------------- #
+TRIM_GALORE_PARAMS:
+  HiSeq4000: '--quality 20'
+  HiSeq2000: '--quality 20'
+  NovaSeq: '--2colour 20'
+  NextSeq: '--2colour 20'
+# -------------------------- Effective Genome Size -------------------------- #
+# Ref:
+# https://deeptools.readthedocs.io/en/latest/content/feature/effectiveGenomeSize.html
+# for 150 bp paired end
+EFF_GENOME_SIZES: {'hg38' : 2862010578,
+                   'mm10' : 2494787188,
+                   'dm6' : 129941135,
+                   'ce11' : 98721253}
+
+# ----------------------- Bowtie2 alignment --------------------------------- #
+BOWTIE2_EXTRA: '--seed 1 --mm --very-sensitive'
+MAX_FRAGMENT_LENGTH: 2000
+
+#---------------------------- Count reads in bins---------------------------- #
+SLOP_LENGTH_BLACKLIST: 1000
+FEATURECOUNTS_MIN_Q: 20
+FEATURECOUNTS_EXTRA: '-p -O'
+GBIN_SIZES: [300, 1000, 10000, 100000]
