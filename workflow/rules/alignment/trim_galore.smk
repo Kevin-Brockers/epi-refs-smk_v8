@@ -27,6 +27,7 @@ rule trim_galore_se:
             -j 4 \
             --gzip \
             --fastqc_args '--outdir {output.fastqc_dir}' \
+            --basename {wildcards.sample_id} \
             -o {output.out_dir} \
             {input} 2> {log}
         """
@@ -38,10 +39,10 @@ rule trim_galore_pe:
     output:
         fq1 = temp(
             str(TEMP_DIR / 'fastq' / 'trimmed' / 
-            '{sample_id}' / '{sample_id}_1_val_1.fq.gz')),
+            '{sample_id}' / '{sample_id}_val_1.fq.gz')),
         fq2 = temp(
             str(TEMP_DIR / 'fastq' / 'trimmed' / 
-            '{sample_id}' / '{sample_id}_2_val_2.fq.gz')),
+            '{sample_id}' / '{sample_id}_val_2.fq.gz')),
         out_dir = temp(directory(
             str(TEMP_DIR / 'fastq' / 'trimmed' / '{sample_id}'))),
         fastqc_dir = directory(
@@ -65,6 +66,7 @@ rule trim_galore_pe:
             --gzip \
             --paired \
             --fastqc_args '--outdir {output.fastqc_dir}' \
+            --basename {wildcards.sample_id} \
             -o {output.out_dir} \
             {input} 2> {log}
         """

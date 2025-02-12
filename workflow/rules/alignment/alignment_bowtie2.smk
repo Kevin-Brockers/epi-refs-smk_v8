@@ -25,7 +25,7 @@ rule bowtie2_alignment_se:
                 --threads {threads} \
                 {params.extra} \
                 -x {input.index} \
-                -1 {input.trimmed_read} | \
+                -U {input.trimmed_read} | \
             samtools view -Sbh -o {output}) &> {log}
         """
 

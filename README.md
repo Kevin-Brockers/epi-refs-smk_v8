@@ -16,6 +16,7 @@ for downstream project.
 
 ## Workflow overview
 
+![snakeflow](snakeflow.jpg)
 ```mermaid
   graph TD;
   sra_prefetch --> trim_galore
@@ -27,4 +28,3 @@ for downstream project.
   create_count_matrix --> cluster_samples
   create_count_matrix --> optional_cell_state_comparisons
 ```
-
