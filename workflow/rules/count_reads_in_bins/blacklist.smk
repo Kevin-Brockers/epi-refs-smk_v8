@@ -13,7 +13,7 @@ rule get_blacklist:
 rule slop_blacklist:
     input:
         bed = rules.get_blacklist.output,
-        chromsizes = rules.filter_autosomal_chromsizes.output
+        chromsizes = rules.compute_chromsizes.output
     output:
         str(EXTERNAL_DATA_DIR / 'blacklist' / '{genome}' / 
             '{genome}-blacklist_sloped.v2.bed')

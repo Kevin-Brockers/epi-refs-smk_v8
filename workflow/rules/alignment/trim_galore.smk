@@ -1,6 +1,40 @@
+rule trim_galore_se:
+    input:
+        input_trim_galore_se
+    output:
+        fq = temp(
+            str(TEMP_DIR / 'fastq' / 'trimmed' / 
+            '{sample_id}' / '{sample_id}_trimmed.fq.gz')),
+        out_dir = temp(directory(
+            str(TEMP_DIR / 'fastq' / 'trimmed' / '{sample_id}'))),
+        fastqc_dir = directory(
+            str(QUALITY_CONTROL_DIR / 'fastqc' / 'trimmed' / '{sample_id}'))
+    log:
+        str(LOG_DIR / 'trimgalore' / '{sample_id}.log')
+    params:
+        extra = params_trim_galore
+    threads:
+        16
+    conda:
+        "../../envs/trim_galore.yml"
+    resources:
+        mem_mb = 16000
+    shell:
+        """
+        mkdir {output.fastqc_dir} && \
+        trim_galore \
+            {params.extra} \
+            -j 4 \
+            --gzip \
+            --fastqc_args '--outdir {output.fastqc_dir}' \
+            -o {output.out_dir} \
+            {input} 2> {log}
+        """
+
+
 rule trim_galore_pe:
     input:
-        [rules.sra_fastq_dump.output.fq1, rules.sra_fastq_dump.output.fq2]
+        input_trim_galore_pe
     output:
         fq1 = temp(
             str(TEMP_DIR / 'fastq' / 'trimmed' / 
@@ -17,7 +51,7 @@ rule trim_galore_pe:
     params:
         extra = params_trim_galore
     threads:
-        1
+        16
     conda:
         "../../envs/trim_galore.yml"
     resources:
@@ -27,7 +61,7 @@ rule trim_galore_pe:
         mkdir {output.fastqc_dir} && \
         trim_galore \
             {params.extra} \
-            -j {threads} \
+            -j 4 \
             --gzip \
             --paired \
             --fastqc_args '--outdir {output.fastqc_dir}' \
@@ -35,4 +69,4 @@ rule trim_galore_pe:
             {input} 2> {log}
         """
 
-
+# {threads} \ check the --cores 4 explanation https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md

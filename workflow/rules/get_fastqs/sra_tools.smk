@@ -19,16 +19,15 @@ rule sra_prefetch:
         """ 
 
 
-rule sra_fastq_dump:
+# Single end dumping
+rule sra_fastq_dump_se:
     input:
-        unpack(input_sra_fastq_dump)
+        rules.sra_prefetch.output.sra_file
     output:
-        fq1 = str(EXTERNAL_DATA_DIR / 'fastq' / '{sample_id}' / 
-            '{sample_id}_1.fastq.gz'),
-        fq2 = str(EXTERNAL_DATA_DIR / 'fastq' / '{sample_id}' / 
-            '{sample_id}_2.fastq.gz')
+        fq = str(EXTERNAL_DATA_DIR / 'fastq' / '{sra_id}' / 
+            '{sra_id}.fastq.gz')
     params:
-        fq_dir = str(EXTERNAL_DATA_DIR / 'fastq' / '{sample_id}')
+        fq_dir = str(EXTERNAL_DATA_DIR / 'fastq' / '{sra_id}')
     threads:
         1
     conda:
@@ -38,9 +37,36 @@ rule sra_fastq_dump:
     shell:
         """
             fastq-dump \
-            {input.sra_file} \
+            {input} \
+            --outdir {params.fq_dir} \
+            --skip-technical \
+            --gzip
+        """
+
+
+# Paired end dumping
+rule sra_fastq_dump_pe:
+    input:
+        rules.sra_prefetch.output.sra_file
+    output:
+        fq1 = str(EXTERNAL_DATA_DIR / 'fastq' / '{sra_id}' / 
+            '{sra_id}_1.fastq.gz'),
+        fq2 = str(EXTERNAL_DATA_DIR / 'fastq' / '{sra_id}' / 
+            '{sra_id}_2.fastq.gz')
+    params:
+        fq_dir = str(EXTERNAL_DATA_DIR / 'fastq' / '{sra_id}')
+    threads:
+        1
+    conda:
+        '../../envs/sra_tools.yml'
+    resources:
+        mem_mb = 32000
+    shell:
+        """
+            fastq-dump \
+            {input} \
             --outdir {params.fq_dir} \
             --split-files \
             --skip-technical \
-            --gzip 
+            --gzip
         """

@@ -1,6 +1,6 @@
 rule queryname_sortbam:
     input:
-        rules.bowtie2_alignment.output
+        input_queryname_sortbam
     output:
         temp(str(BAM_DIR / 'query_sorted' /  
             '{sample_id}.query_sorted.with_duplicates.bam'))

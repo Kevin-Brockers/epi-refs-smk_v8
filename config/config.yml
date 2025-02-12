@@ -19,6 +19,7 @@ REFERENCE_GENOME: 'mm10'
 #-------------------------- Trim galore parameters--------------------------- #
 TRIM_GALORE_PARAMS:
   HiSeq4000: '--quality 20'
+  HiSeq2500: '--quality 20'
   HiSeq2000: '--quality 20'
   NovaSeq: '--2colour 20'
   NextSeq: '--2colour 20'
@@ -38,5 +39,7 @@ MAX_FRAGMENT_LENGTH: 2000
 #---------------------------- Count reads in bins---------------------------- #
 SLOP_LENGTH_BLACKLIST: 1000
 FEATURECOUNTS_MIN_Q: 20
-FEATURECOUNTS_EXTRA: '-p -O'
+FEATURECOUNTS_EXTRA_SE: '-O --primary --readShiftType downstream
+                         --readShiftSize 200'
+FEATURECOUNTS_EXTRA_PE: '-p --countReadPairs -O --primary'
 GBIN_SIZES: [300, 1000, 10000, 100000]

@@ -1,5 +1,13 @@
 # Own additions
 *.snakemake
+resources
+temp_data
+results
+To-dos.md
+# config/sample_manifest.tsv
+# config/sample_manifest_with_mesc.tsv
+
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

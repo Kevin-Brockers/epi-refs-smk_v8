@@ -13,7 +13,7 @@ rule featurecounts_reads_in_bins:
         str(LOG_DIR / 'featurecounts' / 'count_reads_in_bins' / 
             '{window_size}' / '{sample_id}_{window_size}.log')
     params:
-        extra = config['FEATURECOUNTS_EXTRA'],
+        extra = params_featurecounts_reads_in_bins,
         min_map_quality = config['FEATURECOUNTS_MIN_Q'],
         max_length = config['MAX_FRAGMENT_LENGTH']
     threads:
