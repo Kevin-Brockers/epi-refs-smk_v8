@@ -34,7 +34,7 @@ include: 'rules/alignment/trim_galore.smk'
 include: 'rules/alignment/get_ref_genome.smk'
 include: 'rules/alignment/build_bowtie2_index.smk'
 include: 'rules/alignment/alignment_bowtie2.smk'
-include: 'rules/alginment/deduplicate_reads.smk'
+include: 'rules/alignment/deduplicate_reads.smk'
 
 # Count reads in bins
 include: 'rules/count_reads_in_bins/compute_chromsizes.smk'
@@ -54,7 +54,7 @@ rule rule multiqc:
     threads:
         1
     conda:
-        "../../envs/multiqc.yml"
+        "envs/multiqc.yml"
     resources:
         mem_mb = 16000
     shell:

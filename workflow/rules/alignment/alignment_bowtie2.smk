@@ -16,7 +16,7 @@ rule bowtie2_alignment:
         extra=config['BOWTIE2_EXTRA'],
         max_fragment_length=config['MAX_FRAGMENT_LENGTH']
     conda:
-        '../../envs/alignment/bowtie2.yaml'
+        '../../envs/alignment.yml'
     resources:
         mem_mb=32000,
         time="1-00:00:00"

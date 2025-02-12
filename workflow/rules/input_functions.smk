@@ -12,6 +12,6 @@ def input_sra_fastq_dump(wildcards):
 
 def params_trim_galore(wildcards):
     sample_id = wildcards['sample_id']
-    _sequencer = SAMPLES_COMPLETE.query("sample_id == @sample_id")['Sequencer'][0]
+    _sequencer = SAMPLES_COMPLETE.query("sample_id == @sample_id")['Sequencer'].iloc[0]
 
     return config['TRIM_GALORE_PARAMS'][_sequencer]
