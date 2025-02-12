@@ -17,14 +17,3 @@ for downstream project.
 ## Workflow overview
 
 ![snakeflow](snakeflow.jpg)
-```mermaid
-  graph TD;
-  sra_prefetch --> trim_galore
-  trim_galore --> bowtie2
-  bowtie2 --> picard_deduplication
-  picard_deduplication --> count_in_windows
-  count_in_windows --> create_count_matrix
-  count_in_windows --> compute_bedgraphs/bigwigs
-  create_count_matrix --> cluster_samples
-  create_count_matrix --> optional_cell_state_comparisons
-```
