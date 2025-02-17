@@ -53,6 +53,6 @@ rule bl_rmv_genomic_windows_to_saf:
         """
             awk -v OFS='\t' \
             'BEGIN {{print "GeneID", "Chr", "Start", "End", "Strand"}} \
-            {{print $1"-"$2"-"$3, $1, $2, $3, "."}}' \
+            {{print $1"-"$2"-"$3, $1, $2, $3-1, "."}}' \
             {input} > {output}
         """

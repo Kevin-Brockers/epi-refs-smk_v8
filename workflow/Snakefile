@@ -26,6 +26,7 @@ TEMP_DIR = Path(config['TEMP_DIR'])
 # Include general rules
 include: 'rules/load_sample_manifest.smk'
 include: 'rules/input_functions.smk'
+include: 'rules/get_rule_params.smk'
 include: 'rules/targets_functions.smk'
 
 # Include workflow specific rules
@@ -42,13 +43,16 @@ include: 'rules/count_reads_in_bins/blacklist.smk'
 include: 'rules/count_reads_in_bins/make_genomic_windows.smk'
 include: 'rules/count_reads_in_bins/featurecounts.smk'
 
+# Compute bedgraphs
+include: 'rules/compute_bedgraphs/compute_log2fc_bedgraphs_cpm.smk'
+include: 'rules/compute_bedgraphs/compute_means_and_zscores.smk'
 # QC
 rule rule multiqc:
     input:
         targets()
     output:
         file_path = str(REPORT_DIR / 'multiqc' / 'multiqc_report.html'),
-        base = str(REPORT_DIR / 'multiqc')
+        base = directory(str(REPORT_DIR / 'multiqc'))
     log:
         str(LOG_DIR / 'multiqc' / 'multiqc.log')
     threads:

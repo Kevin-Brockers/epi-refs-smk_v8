@@ -27,15 +27,6 @@ def input_trim_galore_pe(wildcards):
     return ans
 
 
-def params_trim_galore(wildcards):
-    sample_id = wildcards['sample_id']
-
-    _sequencer = SAMPLES_COMPLETE.query("sample_id == @sample_id")\
-        ['Sequencer'].iloc[0]
-
-    return config['TRIM_GALORE_PARAMS'][_sequencer]
-
-
 def input_queryname_sortbam(wildcards):
     ans = []
 
@@ -55,16 +46,80 @@ def input_queryname_sortbam(wildcards):
     return ans
 
 
-def params_featurecounts_reads_in_bins(wildcards):
+def input_compute_log2fc_bedgraphs_cpm(wildcards):
+    ans = {}
     sample_id = wildcards['sample_id']
+    window_size = wildcards['window_size']
 
-    # Get the sequencing mode
-    _seq_type = SAMPLES_COMPLETE.query("sample_id == @sample_id")\
-        ['Sequencing_type'].iloc[0]
+    # Get control sample ID
+    control_sra = SAMPLES_COMPLETE.query('sample_id == @sample_id')\
+        ['Control'].iloc[0]
+
+    control_sample_id = SAMPLES_COMPLETE.query('SRA_ID == @control_sra')\
+        ['sample_id'].iloc[0]
+
+    ans['treatment'] = expand(
+        rules.featurecounts_reads_in_bins.output.indiv_counts,
+            sample_id=sample_id,
+            window_size=window_size)[0]
+
+    ans['control'] = expand(
+        rules.featurecounts_reads_in_bins.output.indiv_counts,
+            sample_id=control_sample_id,
+            window_size=window_size)[0]
+
+    return ans
+
+
+def input_compute_mean_log2fc_and_zscores(wildcards):
+    ans = []
+    sample_id_mean = wildcards['sample_id_mean']
+    window_size = wildcards['window_size']
+
+    sample_ids = SAMPLES_COMPLETE.query("sample_id_mean == @sample_id_mean")\
+        ['sample_id']
+
+    ans.extend(expand(rules.compute_log2fc_bedgraphs_cpm.output.bg,
+        sample_id=sample_ids,
+        window_size=window_size))
+
+    return ans
+
+
+def input_bam_compare_deeptools(wildcards):
+    ans = {}
+    sample_id = wildcards['sample_id']
+    window_size = wildcards['window_size']
+
+    # Get control sample ID
+    control_sra = SAMPLES_COMPLETE.query('sample_id == @sample_id')\
+        ['Control'].iloc[0]
+
+    control_sample_id = SAMPLES_COMPLETE.query('SRA_ID == @control_sra')\
+        ['sample_id'].iloc[0]
+
+    ans['treatment_bam'] = expand(
+        rules.sortbam.output,        
+            sample_id=sample_id,
+            window_size=window_size)[0]
+    ans['treatment_bai'] = expand(
+        rules.indexbam.output,
+        sample_id=sample_id,
+        window_size=window_size)[0]
     
-    if _seq_type == 'single':
-        return config['FEATURECOUNTS_EXTRA_SE']
-    elif _seq_type == 'paired':
-        return config['FEATURECOUNTS_EXTRA_PE']
-    else:
-        raise ValueError('Sequencing type not know')
+
+    ans['control_bam'] = expand(
+        rules.sortbam.output,
+            sample_id=control_sample_id,
+            window_size=window_size)[0]
+
+    ans['control_bai'] = expand(
+        rules.indexbam.output,
+            sample_id=control_sample_id,
+            window_size=window_size)[0]
+
+    ans['blacklist'] = expand(
+        rules.merge_blacklist.output,
+        genome=config['REFERENCE_GENOME'])
+
+    return ans
