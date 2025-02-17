@@ -6,6 +6,8 @@
 for downstream project.
 - Installation of the base snakemake v8 conda env: `conda env create -f base_smk_8v.yml`
 - Add the epigenomic references here: `config/sample_manifest.tsv`
+- This pipeline is very conservative in processing and instead of adding a pseudocount it rather drops sites with
+  insufficient coverage.
 
 ## Set up
 

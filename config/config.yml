@@ -11,7 +11,7 @@ BAM_DIR: 'results/bam_files'
 RESOURCES_DIR: 'resources'
 QUALITY_CONTROL_DIR: 'results/quality_controls'
 LOG_DIR: 'logs'
-TEMP_DIR: 'temp_data/chip_seq'
+TEMP_DIR: 'temp_data'
 
 # ------------------------------- Parameters -------------------------------- #
 REFERENCE_GENOME: 'mm10'
