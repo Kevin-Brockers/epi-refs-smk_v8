@@ -2,7 +2,7 @@ rule featurecounts_reads_in_bins:
     input:
         bam = rules.sortbam.output,
         bai = rules.indexbam.output,
-        saf = expand(rules.bl_rmv_genomic_windows_to_saf.output.saf_tsv,
+        saf = expand(rules.genomic_windows_to_saf.output.saf_tsv,
             genome=config['REFERENCE_GENOME'],
             window_size='{window_size}')
     output:
