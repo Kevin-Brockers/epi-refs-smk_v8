@@ -15,6 +15,9 @@ for downstream project.
 2. Fill out the `config/sample_manifest.tsv`
   - Read the `config/sample_manifest_notes.md`
 3. Set the corresponding reference genome in `config['REFERENCE_GENOME]`
+  - Check whether it is available at `UCSC` if not:
+  - Set the config['USE_CUSTOM_GENOMES'] to `True` and specify the config['CUSTOM_GENOME_PATH']
+  - `CUSTOM_GENOME_PATH` can be a local or remote file, the pipeline also handles compressed or uncompressed reference genomes.
 
 ## Workflow overview
 

@@ -31,8 +31,8 @@ include: 'rules/targets_functions.smk'
 
 # Include workflow specific rules
 include: 'rules/get_fastqs/sra_tools.smk'
-include: 'rules/alignment/trim_galore.smk'
 include: 'rules/alignment/get_ref_genome.smk'
+include: 'rules/alignment/trim_galore.smk'
 include: 'rules/alignment/build_bowtie2_index.smk'
 include: 'rules/alignment/alignment_bowtie2.smk'
 include: 'rules/alignment/deduplicate_reads.smk'
@@ -44,6 +44,7 @@ include: 'rules/count_reads_in_bins/make_genomic_windows.smk'
 include: 'rules/count_reads_in_bins/featurecounts.smk'
 
 # Compute bedgraphs
+include: 'rules/compute_bedgraphs/compute_bedgraphs_cpm.smk'
 include: 'rules/compute_bedgraphs/compute_log2fc_bedgraphs_cpm.smk'
 include: 'rules/compute_bedgraphs/compute_means_and_zscores.smk'
 # QC
