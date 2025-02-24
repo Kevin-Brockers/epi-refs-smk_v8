@@ -44,6 +44,7 @@ include: 'rules/count_reads_in_bins/make_genomic_windows.smk'
 include: 'rules/count_reads_in_bins/featurecounts.smk'
 
 # Compute bedgraphs
+include: 'rules/compute_bedgraphs/compute_bedgraphs_cpm.smk'
 include: 'rules/compute_bedgraphs/compute_log2fc_bedgraphs_cpm.smk'
 include: 'rules/compute_bedgraphs/compute_means_and_zscores.smk'
 # QC
