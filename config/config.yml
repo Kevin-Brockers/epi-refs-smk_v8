@@ -26,6 +26,9 @@ USE_CUSTOM_GENOMES: False # True or False
 # -> The pipeline will automatically check whether it's a local or remote path
 CUSTOM_GENOME_PATH: ''
 
+# -------------------------------- Blacklist -------------------------------- #
+REMOVE_BLACKLISTED_REGIONS: True
+
 #-------------------------- Trim galore parameters--------------------------- #
 TRIM_GALORE_PARAMS:
   Genome_Analyzer_IIx: '--quality 20'
