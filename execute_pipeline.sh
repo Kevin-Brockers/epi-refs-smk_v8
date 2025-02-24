@@ -1,7 +1,7 @@
 #! /bin/bash
 
 snakemake \
-    -j 200 \
+    -j 100 \
     --workflow-profile profiles/cpu_normal \
     --rerun-incomplete \
     --notemp
