@@ -1,0 +1,18 @@
+# Slurm specific settings
+software-deployment-method: conda
+
+executor: slurm
+latency-wait: 60
+default-resources:
+  mem_mb: 4000
+  slurm_account: ife
+  slurm_partition: cpu_p
+  slurm_extra: "'--qos=cpu_normal'"
+  # See here: https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html#additional-custom-job-configuration
+  runtime: 72h
+# set-resources: '' # https://snakemake.readthedocs.io/en/latest/executing/cli.html#non-local-execution
+
+# General settings
+rerun-triggers: mtime
+resources: [html=10]
+# conda-frontend: mamba

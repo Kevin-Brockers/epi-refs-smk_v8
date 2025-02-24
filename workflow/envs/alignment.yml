@@ -1,0 +1,8 @@
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - bowtie2 =2.5.4
+  - samtools =1.21
+  - java-jdk =8.0.112
+  - picard =2.26.3
