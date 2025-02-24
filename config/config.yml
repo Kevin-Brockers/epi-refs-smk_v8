@@ -14,7 +14,17 @@ LOG_DIR: 'logs'
 TEMP_DIR: 'temp_data'
 
 # ------------------------------- Parameters -------------------------------- #
+# ---------------------------- Reference Genomes ---------------------------- #
 REFERENCE_GENOME: 'mm10'
+# Genomes that work with this pipeline
+# - mm10
+# - In principle all genomes provided by UCSC
+
+# Custom genomes, e.g.: T2T genomes or self curated genomes:
+USE_CUSTOM_GENOMES: False # True or False
+# IF True one has to specify the path for download below
+# -> The pipeline will automatically check whether it's a local or remote path
+CUSTOM_GENOME_PATH: ''
 
 #-------------------------- Trim galore parameters--------------------------- #
 TRIM_GALORE_PARAMS:
