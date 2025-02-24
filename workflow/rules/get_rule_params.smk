@@ -4,17 +4,17 @@ def params_get_genome(wildcards):
     if _path.startswith(("http://", "https://", "ftp://", "sftp://")):
         if _path.endswith('gz'):
             # Is remote and compressed
-            command = f'wget --quiet {_path} -O {output[0]}'
+            command = f'wget --quiet {_path} -O'
         else:
             # Is remote and not compressed
-            command = f'wget -qO- {_path} | gzip -c > {output[0]}'
+            command = f'wget -qO- {_path} | gzip -c >'
     else:
         if _path.endswith('gz'):
             # Is local and compressed
-            command = f'cp {_path} {output[0]}'
+            command = f'cp {_path}'
         else:
             # Is local and not compressed
-            command = f'gzip -c {_path} > {output[0]}'
+            command = f'gzip -c {_path} >'
 
     # Construct command
     return command

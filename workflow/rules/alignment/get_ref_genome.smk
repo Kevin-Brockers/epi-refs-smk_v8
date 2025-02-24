@@ -10,7 +10,7 @@ if config['USE_CUSTOM_GENOMES']:
             http=1
         shell:
             """
-                {params.command}
+                {params.command} {output[0]}
             """
 
 

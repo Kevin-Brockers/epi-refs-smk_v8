@@ -3,7 +3,8 @@ rule compute_bedgraphs_cpm:
         counts = rules.featurecounts_reads_in_bins.output.indiv_counts
     output:
         bg = str(RESULTS_DIR / 'bedgraphs' / '{window_size}_bps' / 'cpm' / 
-            'indiv_replicates' / '{sample_id}_res_{window_size}_bps_cpm.bedgraph')
+            'indiv_replicates' / 
+            '{sample_id}_res_{window_size}_bps_cpm.bedgraph')
     log:
         str(LOG_DIR / 'compute_bedgraphs' / 'cpm' / 
             '{sample_id}_res_{window_size}.log')

@@ -27,7 +27,7 @@ cpm_bedgraph = snakemake.output['bg']
 
 ## Load data
 logging.info('Load data')
-df = pd.read_cvs(counts_path,
+df = pd.read_csv(counts_path,
                  sep='\t',
                  skiprows=2,
                  usecols=[1, 2, 3, 6],
