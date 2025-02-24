@@ -15,7 +15,7 @@ rule filter_autosomal_chromsizes:
     input:
         rules.compute_chromsizes.output
     output:
-        str(EXTERNAL_DATA_DIR / 'chromsizes' / 
+        str(EXTERNAL_DATA_DIR / 'chromsizes_autosomal' / 
             '{genome}.autosomal.chrom.sizes')
     shell:
         """
