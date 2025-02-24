@@ -16,5 +16,5 @@ rule compute_bedgraphs_cpm:
         "../../envs/analysis_stack.yml"
     resources:
         mem_mb = 16000
-    shell:
+    script:
         "../../scripts/compute_bedgraphs/compute_cpm_bedgraphs.py"

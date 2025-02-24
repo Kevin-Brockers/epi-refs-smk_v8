@@ -34,7 +34,8 @@ df = pd.read_csv(counts_path,
                  names=['chr', 
                         'start', 
                         'end',
-                        'counts'])
+                        'counts'],
+                index_col=['chr', 'start', 'end'])
 
 if drop_non_covered_bins:
     logging.info('Drop uncovered sites')

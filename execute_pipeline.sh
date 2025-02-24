@@ -4,6 +4,7 @@ snakemake \
     -j 100 \
     --workflow-profile profiles/cpu_normal \
     --rerun-incomplete \
+    --keep-going \
     --notemp
 
 # Plot the rule graph
