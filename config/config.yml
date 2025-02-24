@@ -28,6 +28,7 @@ CUSTOM_GENOME_PATH: ''
 
 #-------------------------- Trim galore parameters--------------------------- #
 TRIM_GALORE_PARAMS:
+  Genome_Analyzer_IIx: '--quality 20'
   HiSeq4000: '--quality 20'
   HiSeq2500: '--quality 20'
   HiSeq2000: '--quality 20'
