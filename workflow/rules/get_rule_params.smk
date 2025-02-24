@@ -1,6 +1,5 @@
-def params_get_genome():
-    ans = ''
-    _path = CUSTOM_GENOME_PATH
+def params_get_genome(wildcards):
+    _path = config['CUSTOM_GENOME_PATH']
     # Check whether path is remote or not
     if _path.startswith(("http://", "https://", "ftp://", "sftp://")):
         if _path.endswith('gz'):

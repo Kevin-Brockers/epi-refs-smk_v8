@@ -1,7 +1,7 @@
 if config['USE_CUSTOM_GENOMES']:
     rule get_genome:
         output:
-            str(INDEX_DIR / 'sequence' / '{genome, [a-z0-9]+}.fa.gz')
+            str(INDEX_DIR / 'sequence' / '{genome}.fa.gz')
         params:
             command = params_get_genome
         threads:
@@ -17,7 +17,7 @@ if config['USE_CUSTOM_GENOMES']:
 elif not config['USE_CUSTOM_GENOMES']:
     rule get_genome:
         output:
-            str(INDEX_DIR / 'sequence' / '{genome, [a-z0-9]+}.fa.gz')
+            str(INDEX_DIR / 'sequence' / '{genome}.fa.gz')
         params:
             path = 'http://hgdownload.cse.ucsc.edu/goldenpath/{wildcards.genome}/bigZips/{wildcards.genome}.fa.gz'
         threads:
@@ -38,7 +38,7 @@ rule unzip_genome:
     input:
         rules.get_genome.output
     output:
-        temp(str(INDEX_DIR / 'sequence' / '{genome, [a-z0-9]+}.fa'))
+        temp(str(INDEX_DIR / 'sequence' / '{genome}.fa'))
     shell:
         """
              gzip -dc {input} > {output}
@@ -49,7 +49,7 @@ rule index_genome:
     input:
         rules.unzip_genome.output
     output:
-        str(INDEX_DIR / 'sequence' / '{genome, [a-z0-9]+}.fa.fai')       
+        str(INDEX_DIR / 'sequence' / '{genome}.fa.fai')       
     threads:
         1        
     conda:

@@ -17,7 +17,15 @@ for downstream project.
 3. Set the corresponding reference genome in `config['REFERENCE_GENOME]`
   - Check whether it is available at `UCSC` if not:
   - Set the config['USE_CUSTOM_GENOMES'] to `True` and specify the config['CUSTOM_GENOME_PATH']
-  - `CUSTOM_GENOME_PATH` can be a local or remote file, the pipeline also handles compressed or uncompressed reference genomes.
+  - `CUSTOM_GENOME_PATH` can be a local or remote file, the pipeline also handles compressed or uncompressed reference
+    genomes.
+4. Enable / disable the usage of the blacklists with `config['REMOVE_BLACKLISTED_REGIONS']`
+  - To be as flexible as possible one can switch on / off the usage of precomputed blacklists.
+  - Keep in mind it is likely when using custom genomes (config['USE_CUSTOM_GENOMES']) no blacklists exist, therefore it
+    should be disabled.
+5. Enable / disable the autosomal chromosome filtering `config['FILTER_AUTOSOMAL_CHRS']`
+  - Same reasoning as 4. custom genomes might have different chromosome names and therefore autosomal filtering will
+    lead to wrong exclusion of chrs. Currently filtering assumes chromosome names are: `chr1... chr20`
 
 ## Workflow overview
 
