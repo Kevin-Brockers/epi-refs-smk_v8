@@ -1,5 +1,5 @@
 # Common file paths
-SAMPLE_MANIFEST: 'config/sample_manifest.tsv'
+SAMPLE_MANIFEST: 'config/sample_manifest_ptm_in_both_conditions.tsv' #'config/sample_manifest.tsv'
 RESULTS_DIR: 'results'
 FIGURE_DIR: 'results/figures'
 REPORT_DIR: 'report'
@@ -52,6 +52,13 @@ EFF_GENOME_SIZES: {'hg38' : 2862010578,
 # ----------------------- Bowtie2 alignment --------------------------------- #
 BOWTIE2_EXTRA: '--seed 1 --mm --very-sensitive'
 MAX_FRAGMENT_LENGTH: 2000
+
+#------------------- Some more Paird end related filtering------------------- #
+PE_SEQ_USE_SINGLE_READ: 1
+SAM_FLAG_EXTRACT_READS_DICT:
+  '': None
+  1: '64'
+  2: '128'
 
 #---------------------------- Count reads in bins---------------------------- #
 SLOP_LENGTH_BLACKLIST: 1000

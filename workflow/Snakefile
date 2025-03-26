@@ -36,6 +36,8 @@ include: 'rules/alignment/trim_galore.smk'
 include: 'rules/alignment/build_bowtie2_index.smk'
 include: 'rules/alignment/alignment_bowtie2.smk'
 include: 'rules/alignment/deduplicate_reads.smk'
+include: 'rules/alignment/extract_reads_from_pe_alignment.smk'
+include: 'rules/alignment/sort_index_bams.smk'
 
 # Count reads in bins
 include: 'rules/count_reads_in_bins/compute_chromsizes.smk'
