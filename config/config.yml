@@ -66,4 +66,7 @@ FEATURECOUNTS_MIN_Q: 20
 FEATURECOUNTS_EXTRA_SE: '-O --primary --readShiftType downstream
                          --readShiftSize 200'
 FEATURECOUNTS_EXTRA_PE: '-p --countReadPairs -O --primary'
+
+FEATURECOUNTS_EXTRA_PE_READ_EXTRACTED: '-p -O --primary 
+  --readShiftType downstream --readShiftSize 200'
 GBIN_SIZES: [300, 1000, 10000, 100000]
