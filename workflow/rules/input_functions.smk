@@ -71,6 +71,19 @@ def input_compute_log2fc_bedgraphs_cpm(wildcards):
     return ans
 
 
+def input_merge_bam_files(wildcards):
+    ans = []
+
+    sample_id_mean = wildcards['sample_id_mean']
+    _sample_ids = SAMPLES_COMPLETE.query(
+        "sample_id_mean == @sample_id_mean")
+
+    for sample_id in _sample_ids['sample_id']:
+        ans.extend(expand(rules.sortbam.output,
+            sample_id=sample_id))
+    return ans
+
+
 def input_compute_mean_log2fc_and_zscores(wildcards):
     ans = []
     sample_id_mean = wildcards['sample_id_mean']
@@ -84,6 +97,34 @@ def input_compute_mean_log2fc_and_zscores(wildcards):
         window_size=window_size))
 
     return ans
+
+
+def input_compute_log2fc_bedgraphs_cpm_merged_bams(wildcards):
+    ans = {}
+    sample_id_mean = wildcards['sample_id_mean']
+    window_size = wildcards['window_size']
+    
+    # Get the corresponding control sample
+    geo_id = SAMPLES_COMPLETE.query(
+        "sample_id_mean == @sample_id_mean")\
+            ['GEO_ID'].iloc[0]
+
+    control_id = SAMPLES_COMPLETE.query(
+        "GEO_ID == @geo_id and Target == 'Input'")\
+            ['sample_id_mean'].iloc[0]
+
+    ans['treatment'] = expand(
+        rules.convert_counts_to_bedgraphs.output.bg_cpm,
+            sample_id_mean=sample_id_mean,
+            window_size=window_size)[0]
+
+    ans['control'] = expand(
+        rules.convert_counts_to_bedgraphs.output.bg_cpm,
+            sample_id_mean=control_id,
+            window_size=window_size)[0]
+    
+    return ans
+
 
 
 def input_bam_compare_deeptools(wildcards):

@@ -29,6 +29,12 @@ CUSTOM_GENOME_PATH: ''
 # -------------------------------- Blacklist -------------------------------- #
 REMOVE_BLACKLISTED_REGIONS: True
 
+# ------------------------ Aggregation of replicates ------------------------ #
+AGGREGATE_REPLICATES: 'sum' 
+  # Either sum, so bam files are combined 'mean' and used for calculations or 
+  # mean, where the average coverage is used (starting from the log2fc) -> This
+  # is more diagnostic, summed reads are used for peak calling 
+
 # --------------------------- Count reads in bins --------------------------- #
 FILTER_AUTOSOMAL_CHRS: True
 
@@ -49,6 +55,12 @@ EFF_GENOME_SIZES: {'hg38' : 2862010578,
                    'dm6' : 129941135,
                    'ce11' : 98721253}
 
+# ---------------------------------- MACS3 ---------------------------------- #
+MACS3_NARROW_EXTRA: '-f BAM -B -q 0.05 --call-summits'
+MACS3_BROAD_EXTRA: '-f BAM -B -q 0.05 --broad-cutoff 0.1'
+# -q 0.05
+# --min-length 150
+# --max-gap 1000
 # ----------------------- Bowtie2 alignment --------------------------------- #
 BOWTIE2_EXTRA: '--seed 1 --mm --very-sensitive'
 MAX_FRAGMENT_LENGTH: 2000
@@ -69,4 +81,4 @@ FEATURECOUNTS_EXTRA_PE: '-p --countReadPairs -O --primary'
 
 FEATURECOUNTS_EXTRA_PE_READ_EXTRACTED: '-p -O --primary 
   --readShiftType downstream --readShiftSize 200'
-GBIN_SIZES: [300, 1000, 10000, 100000]
+GBIN_SIZES: [150, 300, 1000, 10000, 100000]

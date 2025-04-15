@@ -48,7 +48,14 @@ include: 'rules/count_reads_in_bins/featurecounts.smk'
 # Compute bedgraphs
 include: 'rules/compute_bedgraphs/compute_bedgraphs_cpm.smk'
 include: 'rules/compute_bedgraphs/compute_log2fc_bedgraphs_cpm.smk'
-include: 'rules/compute_bedgraphs/compute_means_and_zscores.smk'
+
+if config['AGGREGATE_REPLICATES'] == 'mean':
+    include: 'rules/compute_bedgraphs/compute_means_and_zscores.smk'
+elif config['AGGREGATE_REPLICATES'] == 'sum':
+    include: 'rules/sum_replicates/agg_replicates.smk'
+
+# Call peaks
+include: 'rules/call_peaks/macs3.smk'
 # QC
 rule rule multiqc:
     input:

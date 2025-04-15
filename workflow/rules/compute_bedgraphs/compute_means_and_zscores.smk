@@ -23,6 +23,6 @@ rule compute_mean_log2fc_and_zscores:
     conda:
         "../../envs/analysis_stack.yml"
     resources:
-        mem_mb = 8000
+        mem_mb = 32000
     script:
         "../../scripts/compute_bedgraphs/compute_mean_log2fc_and_zscores.py"

@@ -44,3 +44,20 @@ def params_featurecounts_reads_in_bins(wildcards):
         return config['FEATURECOUNTS_EXTRA_PE_READ_EXTRACTED']
     else:
         raise ValueError('Sequencing type not know')
+
+
+def params_featurecounts_reads_in_bins_merged_bams(wildcards):
+    sample_id_mean = wildcards['sample_id_mean']
+
+    # Get the sequencing mode
+    _seq_type = SAMPLES_COMPLETE.query("sample_id_mean == @sample_id_mean")\
+        ['Sequencing_type'].iloc[0]
+    
+    if _seq_type == 'single':
+        return config['FEATURECOUNTS_EXTRA_SE']
+    elif (_seq_type == 'paired' and not config['PE_SEQ_USE_SINGLE_READ']):
+        return config['FEATURECOUNTS_EXTRA_PE']
+    elif (_seq_type == 'paired' and config['PE_SEQ_USE_SINGLE_READ']):
+        return config['FEATURECOUNTS_EXTRA_PE_READ_EXTRACTED']
+    else:
+        raise ValueError('Sequencing type not know')
