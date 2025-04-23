@@ -56,9 +56,9 @@ EFF_GENOME_SIZES: {'hg38' : 2862010578,
                    'ce11' : 98721253}
 
 # ---------------------------------- MACS3 ---------------------------------- #
-MACS3_NARROW_EXTRA: '-f BAM -B -q 0.05 --call-summits'
-MACS3_BROAD_EXTRA: '-f BAM -B -q 0.05 --broad-cutoff 0.1'
-# -q 0.05
+MACS3_NARROW_EXTRA: '-f BAM -B -q 0.05 --call-summits --min-length 150 --max-gap 1000'
+MACS3_BROAD_EXTRA: '-f BAM -B -q 0.05 --broad-cutoff 0.1 --min-length 150 --max-gap 1000'
+
 # --min-length 150
 # --max-gap 1000
 # ----------------------- Bowtie2 alignment --------------------------------- #

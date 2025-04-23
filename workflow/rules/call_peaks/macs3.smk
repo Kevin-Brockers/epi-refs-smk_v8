@@ -50,7 +50,7 @@ rule macs3_call_peaks_narrow:
                 -c {input.control_bam} \
                 -g {params.genome_size} \
                 {params.extra} \
-                -n {wildcards.sample_id_mean}_barrow \
+                -n {wildcards.sample_id_mean}_narrow \
                 --outdir {output.dir} \
                 &> {log}
         """
@@ -83,7 +83,7 @@ rule macs3_call_peaks_broad:
                 -c {input.control_bam} \
                 -g {params.genome_size} \
                 {params.extra} \
-                -n {wildcards.sample_id_mean}_barrow \
+                -n {wildcards.sample_id_mean}_broad \
                 --outdir {output.dir} \
                 &> {log}
         """
