@@ -18,6 +18,7 @@ def targets():
                 window_size=config['GBIN_SIZES']
             )
         )
+
     elif config['AGGREGATE_REPLICATES'] == 'sum':
         TARGETS.extend(
             expand(
@@ -27,6 +28,18 @@ def targets():
             )
         )
 
+        # Compute bigwigs
+        rules_bigwigs = [
+            rules.parse_cpm_bedgraph_to_bigwig.output,
+            rules.parse_cpm_zscore_bedgraph_to_bigwig.output]
+
+        for rule in rules_bigwigs:
+            TARGETS.extend(
+                expand(rule,
+                    sample_id_mean=SAMPLES_COMPLETE['sample_id_mean'],
+                    window_size=config['GBIN_SIZES'])
+            )
+            
         # Add peak calling
         for sample_id_mean in SAMPLES_TREATMENT['sample_id_mean']:
             if SAMPLES_TREATMENT.query(

@@ -84,7 +84,7 @@ rule convert_counts_to_bedgraphs:
             > {output.bg_count}
 
         awk -F '\t' -v OFS='\t' \
-            'NR>2{{print $2, $3, $4, ($7/(1000000/'$SF'))}}' \
+            'NR>2{{print $2, $3, $4, ($7/('$SF' / 1000000))}}' \
             {input} \
             > {output.bg_cpm}
         """
