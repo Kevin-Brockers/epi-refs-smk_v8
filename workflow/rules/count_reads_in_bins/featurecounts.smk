@@ -21,7 +21,7 @@ rule featurecounts_reads_in_bins:
     conda:
         "../../envs/count_reads_in_bins.yml"
     resources:
-        mem_mb = 16000
+        mem_mb = 64000
     shell:
         """
             featureCounts \

@@ -28,6 +28,7 @@ include: 'rules/load_sample_manifest.smk'
 include: 'rules/input_functions.smk'
 include: 'rules/get_rule_params.smk'
 include: 'rules/targets_functions.smk'
+include: 'rules/shared_rules.smk'
 
 # Include workflow specific rules
 include: 'rules/get_fastqs/sra_tools.smk'
@@ -48,7 +49,17 @@ include: 'rules/count_reads_in_bins/featurecounts.smk'
 # Compute bedgraphs
 include: 'rules/compute_bedgraphs/compute_bedgraphs_cpm.smk'
 include: 'rules/compute_bedgraphs/compute_log2fc_bedgraphs_cpm.smk'
-include: 'rules/compute_bedgraphs/compute_means_and_zscores.smk'
+
+if config['AGGREGATE_REPLICATES'] == 'mean':
+    include: 'rules/compute_bedgraphs/compute_means_and_zscores.smk'
+elif config['AGGREGATE_REPLICATES'] == 'sum':
+    include: 'rules/sum_replicates/agg_replicates.smk'
+    # Compute z scores
+    include: 'rules/sum_replicates/compute_zscore_bedgraphs.smk'
+    # Compute bigwigs
+    include: 'rules/compute_bigwigs/compute_bigwigs_cpm.smk'
+# Call peaks
+include: 'rules/call_peaks/macs3.smk'
 # QC
 rule rule multiqc:
     input:

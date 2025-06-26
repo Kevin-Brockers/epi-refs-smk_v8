@@ -12,6 +12,9 @@ for downstream projects.
 ## To dos
 
 - [ ] Implement peak calling
+  - [ ] Peak calling uses macs3 and currently only works when config['AGGREGATE_REPLICATES] == 'sum'
+  - [ ] Also currently only works for "single end" reads, independend whether SE sequenced or PE sequenced and only one
+    read is retained for analysis
 - [ ] Implement a window based analysis
 - [ ] Call chromatin states using ChromHMM or another model
 
