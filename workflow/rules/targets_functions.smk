@@ -63,4 +63,11 @@ def targets():
                         sample_id_mean=sample_id_mean
                     )
                 )
+        
+        # Add counts in dfam
+        TARGETS.extend(
+            expand(rules.featurecounts_reads_in_bins_dfam_annotations.output,
+                sample_id = SAMPLES_COMPLETE['sample_id'])
+        )
+
     return set(TARGETS)

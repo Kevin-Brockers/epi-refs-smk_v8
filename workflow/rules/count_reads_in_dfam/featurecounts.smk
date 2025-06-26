@@ -1,17 +1,15 @@
-rule featurecounts_reads_in_bins:
+rule featurecounts_reads_in_bins_dfam_annotations:
     input:
         bam = rules.sortbam.output,
         bai = rules.indexbam.output,
-        saf = expand(rules.genomic_windows_to_saf.output.saf_tsv,
-            genome=config['REFERENCE_GENOME'],
-            window_size='{window_size}')
+        saf = config['DFAM_ANNOTATIONS_SAF']
     output:
         indiv_counts = str(TEMP_DIR / 'featurecounts' / 
-            'count_reads_in_bins' / 'indiv_counts_{window_size}_bps' /
-            '{sample_id}_counts.txt')
+            'count_reads_in_bins' /  'dfam_annotations' / 'indiv_counts_bps' /
+            '{sample_id}_counts_dfam_annotations.txt')
     log:
         str(LOG_DIR / 'featurecounts' / 'count_reads_in_bins' / 
-            '{window_size}' / '{sample_id}_{window_size}.log')
+            '{sample_id}.log')
     params:
         extra = params_featurecounts_reads_in_bins,
         min_map_quality = config['FEATURECOUNTS_MIN_Q'],

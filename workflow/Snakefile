@@ -60,6 +60,11 @@ elif config['AGGREGATE_REPLICATES'] == 'sum':
     include: 'rules/compute_bigwigs/compute_bigwigs_cpm.smk'
 # Call peaks
 include: 'rules/call_peaks/macs3.smk'
+
+# Count reads in dfam
+include: 'rules/count_reads_in_dfam/featurecounts.smk'
+
+
 # QC
 rule rule multiqc:
     input:

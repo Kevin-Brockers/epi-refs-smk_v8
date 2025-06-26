@@ -65,14 +65,14 @@ MACS3_BROAD_EXTRA: '-f BAM -B -q 0.05 --broad-cutoff 0.1 --min-length 150 --max-
 BOWTIE2_EXTRA: '--seed 1 --mm --very-sensitive'
 MAX_FRAGMENT_LENGTH: 2000
 
-#------------------- Some more Paird end related filtering------------------- #
+# ------------------ Some more Paired end related filtering ----------------- #
 PE_SEQ_USE_SINGLE_READ: 1
 SAM_FLAG_EXTRACT_READS_DICT:
   '': None
   1: '64'
   2: '128'
 
-#---------------------------- Count reads in bins---------------------------- #
+# --------------------------- Count reads in bins---------------------------- #
 SLOP_LENGTH_BLACKLIST: 1000
 FEATURECOUNTS_MIN_Q: 20
 FEATURECOUNTS_EXTRA_SE: '-O --primary --readShiftType downstream
@@ -82,3 +82,6 @@ FEATURECOUNTS_EXTRA_PE: '-p --countReadPairs -O --primary'
 FEATURECOUNTS_EXTRA_PE_READ_EXTRACTED: '-p -O --primary 
   --readShiftType downstream --readShiftSize 200'
 GBIN_SIZES: [150, 300, 1000, 10000, 100000]
+
+# Count reads in dfam annotations
+DFAM_ANNOTATIONS_SAF: ''
