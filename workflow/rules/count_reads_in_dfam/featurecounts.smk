@@ -44,10 +44,10 @@ rule featurecounts_reads_in_bins_dfam_annotations_merged_replicates:
         indiv_counts = str(TEMP_DIR / 'featurecounts' / 
             'count_reads_in_bins' /  'dfam_annotations' / 
             'merged_replicates_indiv_counts_bps' /
-            '{sample_id}_counts_dfam_annotations.txt')
+            '{sample_id_mean}_counts_dfam_annotations.txt')
     log:
         str(LOG_DIR / 'featurecounts' / 'count_reads_in_bins' / 
-            '{sample_id}.log')
+            '{sample_id_mean}.log')
     params:
         extra = params_featurecounts_reads_in_bins,
         min_map_quality = config['FEATURECOUNTS_MIN_Q'],

@@ -71,7 +71,7 @@ def targets():
         )
         TARGETS.extend(
             expand(rules.featurecounts_reads_in_bins_dfam_annotations_merged_replicates.output,
-                sample_id = SAMPLES_TREATMENT['sample_id_mean'])
+                sample_id_mean = SAMPLES_TREATMENT['sample_id_mean'])
         )
 
     return set(TARGETS)
