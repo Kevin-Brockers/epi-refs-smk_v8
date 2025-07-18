@@ -49,7 +49,7 @@ rule featurecounts_reads_in_bins_dfam_annotations_merged_replicates:
         str(LOG_DIR / 'featurecounts' / 'count_reads_in_bins' / 
             '{sample_id_mean}.log')
     params:
-        extra = params_featurecounts_reads_in_bins,
+        extra = params_featurecounts_reads_in_bins_merged_bams,
         min_map_quality = config['FEATURECOUNTS_MIN_Q'],
         max_length = config['MAX_FRAGMENT_LENGTH']
     threads:

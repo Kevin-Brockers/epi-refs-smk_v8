@@ -84,4 +84,4 @@ FEATURECOUNTS_EXTRA_PE_READ_EXTRACTED: '-p -O --primary
 GBIN_SIZES: [150, 300, 1000, 10000, 100000]
 
 # Count reads in dfam annotations
-DFAM_ANNOTATIONS_SAF: ''
+DFAM_ANNOTATIONS_SAF: '/lustre/groups/ife/projects/schneider/collaborative/h1-re-te-paulina_kevin/20250626_dfam_saf_annotations/mm10_dfam_annotations_mapped.saf.tsv'
